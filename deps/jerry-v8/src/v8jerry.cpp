@@ -1684,6 +1684,15 @@ Maybe<bool> Object::SetAccessor(Local<Context> context,
     return Just(configured);
 }
 
+Maybe<bool> Object::SetNativeDataProperty(v8::Local<v8::Context> context,
+                                          v8::Local<Name> name,
+                                          AccessorNameGetterCallback getter,
+                                          AccessorNameSetterCallback setter,
+                                          v8::Local<Value> data,
+                                          PropertyAttribute attributes) {
+  return SetAccessor(context, name, getter, setter, data, DEFAULT, attributes);
+}
+
 void Object::SetInternalField(int idx, Local<Value> value) {
     V8_CALL_TRACE();
     JerryValue* jobj = reinterpret_cast<JerryValue*>(this);
